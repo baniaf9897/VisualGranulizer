@@ -29,6 +29,7 @@ class ofApp : public ofBaseApp{
 		float				m_yFactor;
 		ofVec2f				m_ulImage;
 		ofMesh				m_mesh;
+		ofEasyCam			m_easyCam;
 
 		
 };

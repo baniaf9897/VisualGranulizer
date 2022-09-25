@@ -3,12 +3,12 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofBackground(0, 0, 0);
-	m_image.load("images/louisiana.jpg");
+	m_image.load("images/dresden.jpg");
 	//calcResizeFactor(2048, 1536);
-	float scale = 0.5f;
+	float scale = 0.09f;
 	m_image.resize(m_image.getWidth() * scale, m_image.getHeight() *scale);
 	generateMesh();
-	ofGetCurrentWindow()->setWindowShape(m_image.getWidth(), m_image.getHeight());
+	//ofGetCurrentWindow()->setWindowShape(m_image.getWidth(), m_image.getHeight());
 
 	
 }
@@ -26,7 +26,14 @@ void ofApp::draw(){
 	ofColor centerColor = ofColor(238, 123, 48);
 	ofColor edgeColor = ofColor(85, 214, 190);
 	ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
-	m_mesh.draw();
+ 
+
+	m_easyCam.begin();
+		ofPushMatrix();
+			ofTranslate(-ofGetWidth() / 2, -ofGetHeight() / 2);
+			m_mesh.draw();
+		ofPopMatrix();
+	m_easyCam.end();
 }
 
 //--------------------------------------------------------------
@@ -72,19 +79,19 @@ void ofApp::generateMesh() {
 	m_mesh.setMode(OF_PRIMITIVE_LINES);
 	m_mesh.enableIndices();
 
-	float intensityThreshold = 220.0;
+	float intensityThreshold = 150.0;
 	int w = m_image.getWidth();
 	int h = m_image.getHeight();
 	for (int x = 0; x < w; ++x) {
 		for (int y = 0; y < h; ++y) {
 			ofColor c = m_image.getColor(x, y);
-			float intensity = c.getLightness();
+			float intensity = (ofRandomf() + 1.0f) * 100.0f;//c.getLightness()*;
 			if (intensity >= intensityThreshold) {
-				ofVec3f pos(x, y, 0.0);
+				float saturation = c.getSaturation();
+				float z = ofMap(saturation, 0, 255, -100, 100);
+				ofVec3f pos(x * 4, y * 4, z);
 				m_mesh.addVertex(pos);
-				// When addColor(...), the mesh will automatically convert
-				// the ofColor to an ofFloatColor
-				m_mesh.addColor((c + ofColor(0.7f, 0.7f, 0.7f)) / 2.0f);
+				m_mesh.addColor(c);
 			}
 		}
 	}
