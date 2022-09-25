@@ -30,4 +30,12 @@
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="vertexShader.vert">
+      <Filter>src</Filter>
+    </None>
+    <None Include="fragmentShader.frag">
+      <Filter>src</Filter>
+    </None>
+  </ItemGroup>
 </Project>

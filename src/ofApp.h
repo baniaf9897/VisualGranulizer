@@ -30,6 +30,6 @@ class ofApp : public ofBaseApp{
 		ofVec2f				m_ulImage;
 		ofMesh				m_mesh;
 		ofEasyCam			m_easyCam;
-
+		ofShader			m_shader;
 		
 };

@@ -9,7 +9,7 @@ void ofApp::setup(){
 	m_image.resize(m_image.getWidth() * scale, m_image.getHeight() *scale);
 	generateMesh();
 	//ofGetCurrentWindow()->setWindowShape(m_image.getWidth(), m_image.getHeight());
-
+	m_shader.load("vertexShader.vert","fragmentShader.frag");
 	
 }
 
@@ -27,6 +27,7 @@ void ofApp::draw(){
 	ofColor edgeColor = ofColor(85, 214, 190);
 	ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
  
+	m_shader.begin();
 
 	m_easyCam.begin();
 		ofPushMatrix();
@@ -34,6 +35,10 @@ void ofApp::draw(){
 			m_mesh.draw();
 		ofPopMatrix();
 	m_easyCam.end();
+	m_shader.end();
+
+
+	//ofDrawCircle(glm::vec2(500, 300), 100);
 }
 
 //--------------------------------------------------------------
