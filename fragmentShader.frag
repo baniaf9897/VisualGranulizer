@@ -19,5 +19,5 @@ void main()
     float g = gl_FragCoord.y / windowHeight;
     float b = 1.0;
     float a = 1.0;
-    outputColor = vec4(r, g, b, a);
+    outputColor = vec4(0.0, 0.0, 1.0, a);
 }

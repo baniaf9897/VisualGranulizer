@@ -9,8 +9,11 @@ void ofApp::setup(){
 	m_image.resize(m_image.getWidth() * scale, m_image.getHeight() *scale);
 	generateMesh();
 	//ofGetCurrentWindow()->setWindowShape(m_image.getWidth(), m_image.getHeight());
+
 	m_shader.load("vertexShader.vert","fragmentShader.frag");
-	
+	m_shader.setUniformTexture("texture", m_image.getTexture(), 0);
+
+	ofLog() <<"Is loaded " << m_shader.isLoaded() << std::endl;
 }
 
 //--------------------------------------------------------------
@@ -23,22 +26,20 @@ void ofApp::update(){
 void ofApp::draw(){
 //	m_image.draw(m_ulImage.x, m_ulImage.y, m_image.getWidth() * m_xFactor, m_image.getHeight() * m_yFactor);
 	//ofBackground(238, 123, 48);
-	ofColor centerColor = ofColor(238, 123, 48);
-	ofColor edgeColor = ofColor(85, 214, 190);
-	ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
+//	ofColor centerColor = ofColor(238, 123, 48);
+//	ofColor edgeColor = ofColor(85, 214, 190);
+//	ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
  
-	m_shader.begin();
 
 	m_easyCam.begin();
 		ofPushMatrix();
 			ofTranslate(-ofGetWidth() / 2, -ofGetHeight() / 2);
-			m_mesh.draw();
+			m_shader.begin();
+
+				m_mesh.draw();
+			m_shader.end();
 		ofPopMatrix();
 	m_easyCam.end();
-	m_shader.end();
-
-
-	//ofDrawCircle(glm::vec2(500, 300), 100);
 }
 
 //--------------------------------------------------------------
