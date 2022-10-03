@@ -12,9 +12,9 @@ out vec4 vertColor;
 out vec2 texCoordVarying;
 
 void main(){
+    texCoordVarying = texcoord;
     gl_Position = modelViewProjectionMatrix * position;
     //vertColor = color;
-    texCoordVarying = texcoord;
     
     //billboard
     //vec4 view_pos = view * model * vec3(0,0,0);

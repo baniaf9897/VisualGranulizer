@@ -3,16 +3,17 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofBackground(0, 0, 0);
-	m_image.load("images/dresden.jpg");
+	//m_image.load("images/dresden.jpg");
 	//calcResizeFactor(2048, 1536);
-	float scale = 0.09f;
-	m_image.resize(m_image.getWidth() * scale, m_image.getHeight() *scale);
+	//float scale = 0.09f;
+	//m_image.resize(m_image.getWidth() * scale, m_image.getHeight() *scale);
 	//generateMesh();
 	//ofGetCurrentWindow()->setWindowShape(m_image.getWidth(), m_image.getHeight());
 
 	m_shader.load("vertexShader.vert","rayMarchingShader.frag");
 	//m_shader.setUniformTexture("texture", m_image.getTexture(), 0);
  	//ofLog() <<"Is loaded " << m_shader.isLoaded() << std::endl;
+	m_scale = 1.0f;
 }
 
 //--------------------------------------------------------------
@@ -30,22 +31,25 @@ void ofApp::draw(){
 //	ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
  
 
-	 m_easyCam.begin();
-		ofPushMatrix();
-			 ofTranslate(-ofGetWidth() / 2, -ofGetHeight() / 2);
+	 //m_easyCam.begin();
+	//	ofPushMatrix();
+	//		 ofTranslate(-ofGetWidth() / 2, -ofGetHeight() / 2);
 			m_shader.begin();
 			 m_shader.setUniform3f("uCameraPosition", m_easyCam.getGlobalPosition());
-			//m_shader.setUniform3f("uCameraDir", m_easyCam.getLookAtDir());
+			 m_shader.setUniform1f("scale", m_scale);
+			 m_shader.setUniform2f("screenSize", glm::vec2(ofGetWidth(), ofGetHeight()));
+			 //m_shader.setUniform3f("uCameraDir", m_easyCam.getLookAtDir());
  			ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-				//m_mesh.draw();
+				//m_mesh.draw
 			m_shader.end();
-		ofPopMatrix();
-	m_easyCam.end();
+	//	ofPopMatrix();Z
+	//m_easyCam.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	m_scale += 0.01f;
+	ofLog() << m_scale << std::endl;
 }
 
 //--------------------------------------------------------------

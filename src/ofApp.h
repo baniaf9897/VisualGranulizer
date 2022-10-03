@@ -31,5 +31,6 @@ class ofApp : public ofBaseApp{
 		ofMesh				m_mesh;
 		ofEasyCam			m_easyCam;
 		ofShader			m_shader;
+		float				m_scale;
 		
 };
