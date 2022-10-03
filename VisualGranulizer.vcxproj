@@ -201,6 +201,7 @@
   <ItemGroup>
     <None Include="bin\data\fragmentShader.frag" />
     <None Include="bin\data\geomShader.glsl" />
+    <None Include="bin\data\rayMarchingShader.frag" />
     <None Include="vertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

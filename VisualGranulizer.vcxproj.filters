@@ -40,5 +40,8 @@
     <None Include="bin\data\geomShader.glsl">
       <Filter>src</Filter>
     </None>
+    <None Include="bin\data\rayMarchingShader.frag">
+      <Filter>src</Filter>
+    </None>
   </ItemGroup>
 </Project>

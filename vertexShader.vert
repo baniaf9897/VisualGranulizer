@@ -13,7 +13,11 @@ out vec2 texCoordVarying;
 
 void main(){
     gl_Position = modelViewProjectionMatrix * position;
-    vertColor = color;
+    //vertColor = color;
     texCoordVarying = texcoord;
-
+    
+    //billboard
+    //vec4 view_pos = view * model * vec3(0,0,0);
+    //float dist = -view_pos.z;
+    //gl_Position = project * (view_pos + vec4(position.xy*dist,0,0));
 }
